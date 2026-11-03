@@ -7,6 +7,7 @@ services:
       - ./node-01/index.html:/app/index.html:ro
     ports:
       - "3001:3000"
+    restart: always
 
   node-02:
     build: .
@@ -16,6 +17,7 @@ services:
       - ./node-02/index.html:/app/index.html:ro
     ports:
       - "3002:3000"
+    restart: always
 
   node-03:
     build: .
@@ -25,3 +27,4 @@ services:
       - ./node-03/index.html:/app/index.html:ro
     ports:
       - "3003:3000"
+    restart: always
