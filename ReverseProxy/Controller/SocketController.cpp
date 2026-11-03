@@ -1,5 +1,6 @@
 #include <iostream>
 #include <sys/socket.h>
+#include <sys/types.h>
 #include <netinet/in.h>
 #include <unistd.h>
 #include <cerrno>
@@ -15,6 +16,9 @@ class SocketController{
             return 1;
         }
 
+        std::cout << "Socket criado com sucesso!" << std::endl;
+        std::cout << "File descriptor retornado pelo linux: " << server_fd << std::endl;
+
         struct sockaddr_in address{};
         address.sin_family = AF_INET;
         address.sin_port = htons(8080);
@@ -23,8 +27,7 @@ class SocketController{
         bind(server_fd, (struct sockaddr*)&address, sizeof(address));
 
 
-        std::cout << "Socket criado com sucesso!" << std::endl;
-        std::cout << "File descriptor retornado pelo linux: " << server_fd << std::endl;
+        
 
         close(server_fd);
         std::cout << "Socket fechado com sucesso. \n";
