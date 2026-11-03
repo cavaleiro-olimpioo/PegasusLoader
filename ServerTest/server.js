@@ -5,7 +5,7 @@ const name = process.env.NAME || 'servidor';
 const port = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
-  res.set('X-Servidor', name);
+  res.set('X-Servidor ', name);
   res.send(`Bem-vindo! Você está no ${name}\n`);
 });
 
