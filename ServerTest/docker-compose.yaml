@@ -1,27 +1,27 @@
 services:
   node-01:
     build: .
-    environment: 
-      - NAME: node-01
+    environment:
+      NAME: node-01
     volumes:
-      - ["./node-01/index.html:/app/index.html:ro"]
+      - ./node-01/index.html:/app/index.html:ro
     ports:
-      - ["3001:3000"]
+      - "3001:3000"
 
   node-02:
     build: .
-    environment: 
-      - NAME: node-02
+    environment:
+      NAME: node-02
     volumes:
-      - ["./node-02/index.html:/app/index.html:ro"]
+      - ./node-02/index.html:/app/index.html:ro
     ports:
-      - ["3002:3000"]
-    
+      - "3002:3000"
+
   node-03:
     build: .
-    environment: 
-      - NAME: node-03
+    environment:
+      NAME: node-03
     volumes:
-      - ["./node-03/index.html:/app/index.html:ro"]
+      - ./node-03/index.html:/app/index.html:ro
     ports:
-      - ["3003:3000"]
+      - "3003:3000"
