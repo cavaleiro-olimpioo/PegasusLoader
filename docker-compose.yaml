@@ -1,10 +1,21 @@
 services:
+  proxy:
+    build: ./ReverseProxy
+    ports:
+      - "3000:3000"
+    restart: always
+    depends_on:
+      - node-01
+      - node-02
+      - node-03
+
+
   node-01:
-    build: .
+    build: ./ServerTest
     environment:
       NAME: node-01
     volumes:
-      - ./node-01/index.html:/app/index.html:ro
+      - ./ServerTest/node-01/index.html:/app/index.html:ro
     ports:
       - "3001:3000"
     restart: always
@@ -19,11 +30,11 @@ services:
 
 
   node-02:
-    build: .
+    build: ./ServerTest
     environment:
       NAME: node-02
     volumes:
-      - ./node-02/index.html:/app/index.html:ro
+      - ./ServerTest/node-02/index.html:/app/index.html:ro
     ports:
       - "3002:3000"
     restart: always
@@ -37,11 +48,11 @@ services:
           memory: 256m
 
   node-03:
-    build: .
+    build: ./ServerTest
     environment:
       NAME: node-03
     volumes:
-      - ./node-03/index.html:/app/index.html:ro
+      - ./ServerTest/node-03/index.html:/app/index.html:ro
     ports:
       - "3003:3000"
     restart: always
