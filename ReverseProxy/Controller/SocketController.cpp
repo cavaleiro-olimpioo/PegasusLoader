@@ -1,0 +1,24 @@
+#include <iostream>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <unistd.h>
+#include <cerrno>
+#include <cstring>
+
+
+int SocketController(){
+    int server_fd = socket(AF_INET, SOCK_STREAM, 0);
+
+    if (server_fd < 0){
+        std::cout << "Falha ao criar socket: " << std::strerror(errno) << std::endl;
+        return 1;
+    }
+
+    std::cout << "Socket criado com sucesso!" << std::endl;
+    std::cout << "File descriptor retornado pelo linux: " << server_fd << std::endl;
+
+    close(server_fd);
+    std::cout << "Socket fechado com sucesso. \n";
+
+    return 0;
+}
