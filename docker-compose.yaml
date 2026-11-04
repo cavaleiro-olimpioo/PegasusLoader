@@ -8,6 +8,9 @@ services:
       - node-01
       - node-02
       - node-03
+    networks:
+      - private
+      - public
 
 
   node-01:
@@ -27,6 +30,8 @@ services:
         reservations:
           cpus: '0.25'
           memory: 256m
+    networks:
+      - private
 
 
   node-02:
@@ -46,6 +51,8 @@ services:
         reservations:
           cpus: '0.25'
           memory: 256m
+    networks:
+      - private
 
   node-03:
     build: ./ServerTest
@@ -64,3 +71,14 @@ services:
         reservations:
           cpus: '0.25'
           memory: 256m
+    networks:
+      - private
+
+networks:
+  private:
+    driver: bridge
+    internal: true
+    name: private_network
+  public:
+    driver: bridge
+    name: public_network

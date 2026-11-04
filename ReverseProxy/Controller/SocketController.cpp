@@ -27,21 +27,15 @@ class SocketController{
 
             bind(server_fd, (struct sockaddr*)&address, sizeof(address));
 
-            std::cout << "bind criado com sucesso" << std::endl;
-
             if (listen(server_fd, 10) < 0) {
                 std::cerr << "Falha no listen: " << std::strerror(errno) << std::endl;
                 close(server_fd);
                 return 1;
             }
 
-            std::cout << "Listening criado com sucesso" << std::endl;
-
             int client_fd = accept(server_fd, nullptr, nullptr);
 
             char buffer_header[100];
-
-
 
             ssize_t bytes_read = read(client_fd, buffer_header, sizeof(buffer_header) -1);
 
@@ -51,7 +45,7 @@ class SocketController{
             }
             
 
-            std::cout << "Conectou mas essa porra não ta exibindo" << std::endl;
+
 
             close(server_fd);
             std::cout << "Socket fechado com sucesso. \n";
