@@ -6,7 +6,7 @@
 #include <cerrno>
 #include <cstring>
 
-#include "Controller/ServerRequest.cpp"
+#include "ServerRequest.cpp"
 
 class SocketController{
     public: 
