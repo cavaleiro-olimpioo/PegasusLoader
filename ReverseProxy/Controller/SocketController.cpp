@@ -6,6 +6,7 @@
 #include <cerrno>
 #include <cstring>
 
+#include "Controller/ServerRequest.cpp"
 
 class SocketController{
     public: 
@@ -43,10 +44,19 @@ class SocketController{
                 buffer_header[bytes_read] = '\0';
                 std::cout << "Cliente conectado! " << buffer_header << std::endl;
             }
-            
 
+            RequestServer* request = new RequestServer;
 
+            std::string response = request->request("172.25.0.3:3000");
 
+            if (response.empty()){
+                std::cout << "Ocorreu um erro na resposta so server." << std::endl;
+            }
+
+            write(client_fd, response.c_str(), response.size());
+
+            delete request;
+            close(client_fd);
             close(server_fd);
             std::cout << "Socket fechado com sucesso. \n";
 
