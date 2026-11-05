@@ -1,10 +1,11 @@
-FROM gcc:14 AS build
+FROM gcc:14-bookworm AS build
 WORKDIR /src
 COPY . .
 RUN g++ -std=c++20 -O2 -Wall -Wextra -o proxy main.cpp Controller/*.cpp -lcurl
-RUN apt-get update && apt-get install -y libcurl4-openssl-dev
 
-FROM debian:stable-slim
+FROM debian:bookworm-slim
+RUN apt-get update && apt-get install -y --no-install-recommends libcurl4 \
+    && rm -rf /var/lib/apt/lists/*
 COPY --from=build /src/proxy /usr/local/bin/proxy
 EXPOSE 3000
 CMD ["proxy"]
