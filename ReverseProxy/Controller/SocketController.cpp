@@ -44,8 +44,9 @@ class SocketController{
                 buffer_header[bytes_read] = '\0';
                 std::cout << "Cliente conectado! " << buffer_header << std::endl;
             }
+            
 
-            RequestServer* request = new RequestServer;
+            ServerRequest* request = new ServerRequest;
 
             std::string response = request->request("172.25.0.3:3000");
 

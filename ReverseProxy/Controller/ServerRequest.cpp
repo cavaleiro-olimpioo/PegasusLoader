@@ -2,7 +2,7 @@
 #include <string>
 #include <curl/curl.h>
 
-class RequestServer{
+class ServerRequest{
     private:
         size_t static WriteCallback(void* contents, size_t size, size_t nmemb, std::string* s){
             size_t newLenght = size * nmemb;
@@ -11,6 +11,8 @@ class RequestServer{
             } catch (std::bad_alloc& e){
                 return 1;
             }
+
+            return 0;
         };
     public:
         std::string request(const std::string& url){
@@ -39,6 +41,13 @@ class RequestServer{
                 if (res != CURLE_OK){
                     std::cerr << "Erro no cURL: " << curl_easy_strerror(res) << std::endl;
                 } 
+
+                // Limpa o ponteiro curl
+                curl_easy_cleanup(curl);
             }
+
+            curl_global_cleanup();
+
+            return readBuffer;
         };
 };
