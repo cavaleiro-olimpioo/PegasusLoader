@@ -1,6 +1,6 @@
 services:
   proxy:
-    build: ./ReverseProxy
+    build: ./proxy
     ports:
       - "3000:3000"
     restart: always
@@ -11,6 +11,8 @@ services:
     networks:
       - private
       - public
+
+
 
 
   node-01:

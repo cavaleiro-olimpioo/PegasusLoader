@@ -9,7 +9,7 @@
 
 #include "ServerRequest.cpp"
 
-class SocketController{
+class SocketConnection{
     public: 
         int connect(){
             int server_fd = socket(AF_INET, SOCK_STREAM, 0);
