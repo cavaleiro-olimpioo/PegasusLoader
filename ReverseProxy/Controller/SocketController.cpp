@@ -55,8 +55,6 @@ class SocketController{
                 std::cout << "Ocorreu um erro na resposta so server." << std::endl;
             }
 
-            response = "Bem vindo ao proxy!";
-
             write(client_fd, response.c_str(), response.size());
 
             delete request;
