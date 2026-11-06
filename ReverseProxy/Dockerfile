@@ -4,8 +4,8 @@ COPY . .
 RUN g++ -std=c++20 -O2 -Wall -Wextra -o proxy main.cpp Controller/*.cpp -lcurl
 
 FROM debian:bookworm-slim
-RUN apt-get update && apt-get install -y --no-install-recommends libcurl4 \
-    && rm -rf /var/lib/apt/lists/*
+RUN g++ -std=c++20 -O2 -Wall -Wextra -o proxy main.cpp Controller/*.cpp \
+    -static-libstdc++ -static-libgcc -lcurl
 COPY --from=build /src/proxy /usr/local/bin/proxy
 EXPOSE 3000
 CMD ["proxy"]
