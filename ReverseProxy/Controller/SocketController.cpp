@@ -55,7 +55,14 @@ class SocketController{
                 std::cout << "Ocorreu um erro na resposta so server." << std::endl;
             }
 
-            write(client_fd, response.c_str(), response.size());
+            std::string response_complete = 
+                "HTTP/1.1 200 OK\r\n"
+                "Content-Type: text/plain\r\n"
+                "Content-Length: " + std::to_string(response.size()) + "\r\n"
+                "\r\n"
+                + response;
+
+            write(client_fd, response_complete.c_str(), response_complete.size());
 
             delete request;
             close(client_fd);
