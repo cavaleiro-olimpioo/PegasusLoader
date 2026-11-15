@@ -1,53 +1,26 @@
 #include <iostream>
-#include <string>
-#include <curl/curl.h>
+#include <sys/socket.h>
+#include <sys/types.h>
+#include <netinet/in.h>
+#include <unistd.h>
+#include <cerrno>
+#include <cstring>
 
 class ServerRequest{
-    private:
-        size_t static WriteCallback(void* contents, size_t size, size_t nmemb, std::string* s){
-            size_t newLenght = size * nmemb;
-            try{
-                s->append((char*)contents, newLenght);
-            } catch (std::bad_alloc& e){
-                return 1;
+    public: 
+        std::string request(std::string server){
+            int server_fd = socket(AF_INET, SOCK_STREAM, 0);
+
+            if(server_fd < 0){
+                std::cout << "Falha ao estabelecer conexão com o servidor" << std::endl;
+                return "Error";
             }
 
-            return 0;
-        };
-    public:
-        std::string request(const std::string& url){
-            CURL* curl;
-            CURLcode res;
-            std::string readBuffer;
+            struct sockaddr_in address{};
+            address.sin_family = AF_INET;
+            address.sin_port = htons(3000);
+            address.sin_addr.s_addr = INADDR_ANY;
 
-            curl_global_init(CURL_GLOBAL_ALL);
-            curl = curl_easy_init();
 
-            if (curl){
-                // Define a url da request
-                curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-
-                // Define callback de escrita a string
-                curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
-                curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
-
-                // Usando user agent válido
-                curl_easy_setopt(curl, CURLOPT_USERAGENT, "libcurl-agent/1.0");
-
-                // Executa a request HTTP GET
-                res = curl_easy_perform(curl);
-
-                // Tratamento de erros no request
-                if (res != CURLE_OK){
-                    std::cerr << "Erro no cURL: " << curl_easy_strerror(res) << std::endl;
-                } 
-
-                // Limpa o ponteiro curl
-                curl_easy_cleanup(curl);
-            }
-
-            curl_global_cleanup();
-
-            return readBuffer;
-        };
+        }
 };

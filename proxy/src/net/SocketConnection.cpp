@@ -19,8 +19,8 @@ class SocketConnection{
                 return 1;
             }
 
-            std::cout << "Socket criado com sucesso!" << std::endl;
-            std::cout << "File descriptor retornado pelo linux: " << server_fd << std::endl;
+            // std::cout << "Socket criado com sucesso!" << std::endl;
+            // std::cout << "File descriptor retornado pelo linux: " << server_fd << std::endl;
 
             struct sockaddr_in address{};
             address.sin_family = AF_INET;
@@ -49,20 +49,14 @@ class SocketConnection{
 
             ServerRequest* request = new ServerRequest;
 
-            std::string response = request->request("172.25.0.3:3000");
+            std::string response = request->request("172.25.0.3");
 
             if (response.empty()){
                 std::cout << "Ocorreu um erro na resposta so server." << std::endl;
             }
 
-            std::string response_complete = 
-                "HTTP/1.1 200 OK\r\n"
-                "Content-Type: text/plain\r\n"
-                "Content-Length: " + std::to_string(response.size()) + "\r\n"
-                "\r\n"
-                + response;
-
-            write(client_fd, response_complete.c_str(), response_complete.size());
+            
+            write(client_fd, response.c_str(), response.size());
 
             delete request;
             close(client_fd);
