@@ -1,8 +1,6 @@
 #include <iostream>
 #include <sys/socket.h>
-#include <sys/types.h>
 #include <netinet/in.h>
-#include <unistd.h>
 #include <cerrno>
 #include <cstring>
 
@@ -25,11 +23,7 @@ class MainSocket{
 
             bind(server_fd, (struct sockaddr*)&address, sizeof(address));
 
-            if (listen(server_fd, 10) < 0) {
-                std::cerr << "Falha no listen: " << std::strerror(errno) << std::endl;
-                close(server_fd);
-                return 1;
-            }
+            listen(server_fd, 10);
 
             std::cout << "Socket criado com sucesso!" << std::endl;
             std::cout << "File descriptor retornado pelo linux: " << server_fd << std::endl;
