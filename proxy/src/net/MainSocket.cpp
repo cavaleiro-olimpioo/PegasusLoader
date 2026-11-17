@@ -7,8 +7,6 @@
 #include <cstring>
 
 
-#include "ServerRequest.cpp"
-
 class SocketConnection{
     public: 
         int connect(){
@@ -35,34 +33,6 @@ class SocketConnection{
                 return 1;
             }
 
-            int client_fd = accept(server_fd, nullptr, nullptr);
-
-            char buffer_header[100];
-
-            ssize_t bytes_read = read(client_fd, buffer_header, sizeof(buffer_header) -1);
-
-            if (bytes_read > 0){
-                buffer_header[bytes_read] = '\0';
-                std::cout << "Cliente conectado! " << buffer_header << std::endl;
-            }
-            
-
-            ServerRequest* request = new ServerRequest;
-
-            std::string response = request->request("172.25.0.3");
-
-            if (response.empty()){
-                std::cout << "Ocorreu um erro na resposta so server." << std::endl;
-            }
-
-            
-            write(client_fd, response.c_str(), response.size());
-
-            delete request;
-            close(client_fd);
-            close(server_fd);
-            std::cout << "Socket fechado com sucesso. \n";
-
-            return 0;
+            return server_fd;
         }
 };
