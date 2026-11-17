@@ -14,7 +14,6 @@ class MainSocket{
                 std::cout << "Falha ao criar socket: " << std::strerror(errno) << std::endl;
                 return 1;
             }
-
             
             struct sockaddr_in address{};
             address.sin_family = AF_INET;
