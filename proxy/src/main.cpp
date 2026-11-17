@@ -3,17 +3,13 @@
 
 int main(){
 
-    SocketConnection* socketConnection = new SocketConnection;
+    MainSocket* mainSocket = new MainSocket;
 
-    int connectSocket = socketConnection->connect();
+    int connectSocket = mainSocket->connect();
 
-    if (connectSocket != 0){
-        std::cerr << "Erro ao conectar o socket." << std::endl;
-        delete socketConnection;
-        return 1;
-    }
+    std::cout << connectSocket << std::endl;
 
 
-    delete socketConnection;
+    delete mainSocket;
     return 0;
 }
