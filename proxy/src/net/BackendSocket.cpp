@@ -6,7 +6,7 @@
 
 class BackendSocket{
     public:
-        int connect(){
+        int connect(int node){
             int backend_fd = socket(AF_INET, SOCK_STREAM, 0); 
 
              if (backend_fd < 0){
@@ -16,7 +16,7 @@ class BackendSocket{
 
             struct sockaddr_in address{};
             address.sin_family = AF_INET;
-            address.sin_port = htons(3001);
+            address.sin_port = htons(node);
             address.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
 
             bind(backend_fd, (struct sockaddr*)&address, sizeof(address));
