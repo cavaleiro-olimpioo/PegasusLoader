@@ -14,7 +14,7 @@ int main(){
     const char* node = "172.25.0.3";
     int backend_fd = backendSocket->connect(node);
 
-    SocketsComunication::request(server_fd, client_fd, backend_fd);
+    SocketsComunication::request(client_fd, backend_fd);
 
     close(backend_fd);
     close(server_fd);
