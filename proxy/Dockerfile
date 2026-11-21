@@ -3,7 +3,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends g++ libcurl4-op
     && rm -rf /var/lib/apt/lists/*
 WORKDIR /src
 COPY . .
-RUN g++ -std=c++20 -O2 -Wall -Wextra -o proxy src/main.cpp src/net/SocketsComunication.cpp src/net/sockets/MainSocket.cpp src/net/sockets/ClientSocket.cpp src/net/sockets/BackendSocket.cpp -lcurl
+RUN g++ -std=c++20 -O2 -Wall -Wextra -o proxy src/main.cpp src/util/SocketAuxiliar.cpp src/net/SocketsComunication.cpp src/net/sockets/MainSocket.cpp src/net/sockets/ClientSocket.cpp src/net/sockets/BackendSocket.cpp -lcurl
 
 FROM debian:bookworm-slim
 RUN apt-get update && apt-get install -y --no-install-recommends libcurl4 \
