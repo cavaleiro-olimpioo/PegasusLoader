@@ -1,9 +1,14 @@
 #!/bin/bash
 
-echo "Verificando atualizações no código"
+echo "========================================"
+echo "   Verificando atualizações no código"
+echo "========================================"
+
 
 git pull
 
-echo "Inicializando docker"
+echo "==========================="
+echo "   Inicializando docker"
+echo "==========================="
 
 docker compose up --build
