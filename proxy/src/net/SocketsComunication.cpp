@@ -21,7 +21,12 @@ class SocketsComunication{
 
             std::cout << "Mensagem recebida do servidor: " << bufferResponse << std::endl;
 
-            write(client_fd, bufferResponse, strlen(bufferResponse));
             
+            if (strlen(bufferResponse) == 0){
+                const char* errorResponse = "[ERRO] O servidor não respondeu";
+                write(client_fd, errorResponse, strlen(errorResponse));
+            } else {
+                write(client_fd, bufferResponse, strlen(bufferResponse));
+            }
         }
 };
