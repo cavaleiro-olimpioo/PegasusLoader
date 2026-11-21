@@ -21,7 +21,7 @@ int main(){
 
 
     std::cout << "Socket principal criado com fd de " << server_fd << std::endl;
-    std:: cout << "Client socket criado com fd de " << client_fd << std::endl;
+    std::cout << "Client socket criado com fd de " << client_fd << std::endl;
     std::cout << "Backend criado com fd de " << backend_fd << std::endl;
 
     close(backend_fd);
