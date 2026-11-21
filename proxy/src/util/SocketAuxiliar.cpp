@@ -13,23 +13,23 @@ class SocketAuxiliar{
 
                 if (sent < 0){
                     if (errno == EINTR){
-                        std::cout << errno;
+                        std::cout << "[ERRO] errno: " << errno << std::endl;
                         continue;
                     }
 
-                    std::cout << errno;
+                    std::cout << "[ERRO] errno: " << errno << std::endl;
                     return total_sent;
                 }
 
                 if (sent == 0){
-                    std::cout << errno;
+                    std::cout << "[ERRO] errno: " << errno << std::endl;
                     return total_sent;
                 }
 
                 total_sent += static_cast<size_t>(sent);
             }
+
             
-            std::cout << errno;
             return total_sent;
         }
 };
