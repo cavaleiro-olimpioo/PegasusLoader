@@ -19,13 +19,7 @@ class SocketsComunication{
 
             bufferRequest[bytes_read_request] = '\0';
 
-            
-
-            std::cout << "Mensagem recebida do cliente: " << bufferRequest << std::endl;
-
-            ssize_t bytes_written_server = SocketAuxiliar::write_all(backend_fd, bufferRequest, static_cast<size_t>(bytes_read_request));
-
-            std::cout << "Mensagem enviada para o servidor: " << bytes_written_server << std::endl;
+            SocketAuxiliar::write_all(backend_fd, bufferRequest, static_cast<size_t>(bytes_read_request));
 
             ssize_t bytes_read_response = read(backend_fd, bufferResponse, sizeof(bufferResponse) -1);
             bufferResponse[bytes_read_response] = '\0';
@@ -35,10 +29,6 @@ class SocketsComunication{
                 return;
             }
 
-
-            std::cout << "Mensagem recebida do servidor: " << bufferResponse << std::endl;
-
-            ssize_t bytes_written_client = SocketAuxiliar::write_all(client_fd, bufferResponse, static_cast<size_t>(bytes_read_response));
-            std::cout << "Mensagem enviada para o cliente: " << bytes_written_client << std::endl;
+            SocketAuxiliar::write_all(client_fd, bufferResponse, static_cast<size_t>(bytes_read_response));
         }
 };

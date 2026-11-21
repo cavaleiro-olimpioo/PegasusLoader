@@ -24,10 +24,6 @@ class MainSocket{
 
             listen(server_fd, 10);
 
-            std::cout << "Socket criado com sucesso!" << std::endl;
-            std::cout << "File descriptor retornado pelo linux: " << server_fd << std::endl;
-
-
             return server_fd;
         }
 };

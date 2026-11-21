@@ -22,9 +22,6 @@ class BackendSocket{
 
             ::connect(backend_fd, (struct sockaddr*)&address, sizeof(address));
 
-            std::cout << "Backend socket criado com sucesso!" << std::endl;
-            std::cout << "File descriptor: " << backend_fd << std::endl;
-
             return backend_fd;
         }
 };
