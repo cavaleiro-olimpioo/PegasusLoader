@@ -20,10 +20,6 @@ class BackendSocket{
             address.sin_port = htons(3000);
             inet_pton(AF_INET, node, &address.sin_addr);
 
-            bind(backend_fd, (struct sockaddr*)&address, sizeof(address));
-
-            listen(backend_fd, 10);
-
             ::connect(backend_fd, (struct sockaddr*)&address, sizeof(address));
 
             std::cout << "Backend socket criado com sucesso!" << std::endl;
