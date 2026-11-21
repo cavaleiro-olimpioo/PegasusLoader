@@ -23,7 +23,7 @@ class SocketsComunication{
 
             
             if (strlen(bufferResponse) == 0){
-                const char* errorResponse = "[ERRO] O servidor não respondeu";
+                const char* errorResponse = "GET / HTTP/1.1\nHost: 192.168.0.82\nUser-Agent: Pegasus\n[ERRO] O servidor não respondeu";
                 write(client_fd, errorResponse, strlen(errorResponse));
             } else {
                 write(client_fd, bufferResponse, strlen(bufferResponse));
